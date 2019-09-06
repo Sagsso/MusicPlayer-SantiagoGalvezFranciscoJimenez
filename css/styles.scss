@@ -4,6 +4,8 @@
     margin: 0;
     padding: 0;
 }
+$colorPressed: #ff564c;
+$colorUnpressed: #6d6d6d;;
 
 body {
     display: flex;
@@ -148,7 +150,7 @@ body {
                     padding-left: 30px;
                 }
                 .cora-color{
-                        fill: #ff564c;
+                        fill: $colorPressed;
                 }
                 .cora:hover .cora-color{
                     fill:#bbb;
@@ -161,7 +163,7 @@ body {
                         fill: #bbb;
                 }
                 .repeat-color{
-                        fill: #ff564c;
+                        fill: $colorPressed;
                 }
                 .repeat:hover .repeat-color{
                         fill: #bbb;
@@ -178,6 +180,14 @@ body {
             }
         }
         
+    }
+
+    .pressed {
+        fill: $colorPressed;
+    }
+
+    .unpressed{
+        fill:$colorUnpressed;
     }
 
 

@@ -168,4 +168,12 @@ body #container footer .dots:hover .dots-color {
   fill: #bbb;
 }
 
+.pressed {
+  fill: #ff564c;
+}
+
+.unpressed {
+  fill: #6d6d6d;
+}
+
 /*# sourceMappingURL=styles.css.map */

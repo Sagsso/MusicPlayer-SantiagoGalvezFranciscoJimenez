@@ -1,16 +1,14 @@
 
 class AudioPlayer {
 
-    constructor(sources) {
-
+    constructor(btnPlay) {
+        console.log(btnPlay.getAttribute("src"))
         this.audio = document.createElement("audio");
-
-        for (var i = 0; i < sources.length; i++) {
-            var source = document.createElement("source");
-            source.src = sources[i];
-            this.audio.appendChild(source);
-        }
+        this.source = document.createElement("source");
+        this.source.src = `./${btnPlay.getAttribute("src")}`;
+        this.audio.appendChild(this.source);
         this.audio.volume = 1;
+        this.reproductorDOM = document.getElementById('container');
     }
 
 
@@ -20,8 +18,8 @@ class AudioPlayer {
         });
     }
 
-    update(volume) {
-        this.audio.volume = volume;
+    pause() {
+        this.audio.pause()
     }
 
 }
