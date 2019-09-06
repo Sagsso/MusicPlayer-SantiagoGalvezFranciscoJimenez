@@ -23,21 +23,21 @@ $btnRepro.onclick = (e) => {
     }
 }
 
-let $cora = document.querySelector('.cora')
+let $cora = document.getElementById('cora')
 $cora.onclick = (e) => {
     let $coraColor = document.querySelector('.cora-color')
     $coraColor.classList.toggle('pressed')
     $coraColor.classList.toggle('unpressed')
 }
 
-let $shuffle = document.querySelector('.shuffle')
+let $shuffle = document.getElementById('shuffle')
 $shuffle.onclick = (e) => {
     let $shuffleColor = document.querySelector('.shuffle-color')
     $shuffleColor.classList.toggle('pressed')
     $shuffleColor.classList.toggle('unpressed')
 }
 
-let $repeat = document.querySelector('.repeat')
+let $repeat = document.getElementById('repeat')
 $repeat.onclick = (e) => {
     let $repeatColor = document.querySelector('.repeat-color')
     $repeatColor.classList.toggle('pressed')

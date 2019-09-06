@@ -23,7 +23,8 @@ body {
 
         #top {
             position: relative;
-            
+            display: flex;
+            align-items:center;
             .menu {
                 position: absolute;
                 top: 20px;
@@ -146,29 +147,16 @@ body {
                         height:15px; 
                         cursor: pointer;
                 }
-                .cora {
+                #cora {
                     padding-left: 30px;
                 }
                 
-                .cora:hover .cora-color{
-                    fill:#bbb;
-                }
-
                 
-                .shuffle:hover .shuffle-color{
-                        fill: #bbb;
-                }
-                
-                .repeat:hover .repeat-color{
-                        fill: #bbb;
-                }
-                .dots {
+                #dots {
                     padding-right: 30px;
                 }
                 
-                .dots:hover .dots-color{
-                    fill: #bbb;
-                }
+                
                 .pressed {
                     fill: $colorPressed;
                 }
@@ -179,6 +167,46 @@ body {
             }
         }
         
+    }
+
+    @media (max-width:375px){
+        body{
+            padding:0;
+            #container{
+                width: 100vw;
+                height: 100vh;
+                #bottom{
+                    #repro{
+                        #song{
+                            h1{
+                                font-size: 16px;
+                            }
+                            h5{
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media (min-width:376px){
+        #cora:hover .cora-color{
+            fill:#bbb;
+        }
+
+
+        #shuffle:hover .shuffle-color{
+            fill: #bbb;
+        }
+                    
+        #repeat:hover .repeat-color{
+            fill: #bbb;
+        }
+
+        #dots:hover .dots-color{
+            fill: #bbb;
+        }
     }
 
 

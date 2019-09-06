@@ -17,6 +17,8 @@ body #container {
 }
 body #container #top {
   position: relative;
+  display: flex;
+  align-items: center;
   height: 55%;
   background-color: black;
 }
@@ -137,29 +139,50 @@ body #container footer svg {
   height: 15px;
   cursor: pointer;
 }
-body #container footer .cora {
+body #container footer #cora {
   padding-left: 30px;
 }
-body #container footer .cora:hover .cora-color {
-  fill: #bbb;
-}
-body #container footer .shuffle:hover .shuffle-color {
-  fill: #bbb;
-}
-body #container footer .repeat:hover .repeat-color {
-  fill: #bbb;
-}
-body #container footer .dots {
+body #container footer #dots {
   padding-right: 30px;
-}
-body #container footer .dots:hover .dots-color {
-  fill: #bbb;
 }
 body #container footer .pressed {
   fill: #ff564c;
 }
 body #container footer .unpressed {
   fill: #6d6d6d;
+}
+
+@media (max-width: 375px) {
+  body {
+    padding: 0;
+  }
+  body #container {
+    width: 100vw;
+    height: 100vh;
+  }
+  body #container #bottom #repro #song h1 {
+    font-size: 16px;
+  }
+  body #container #bottom #repro #song h5 {
+    font-size: 12px;
+  }
+}
+@media (min-width: 376px) {
+  #cora:hover .cora-color {
+    fill: #bbb;
+  }
+
+  #shuffle:hover .shuffle-color {
+    fill: #bbb;
+  }
+
+  #repeat:hover .repeat-color {
+    fill: #bbb;
+  }
+
+  #dots:hover .dots-color {
+    fill: #bbb;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
