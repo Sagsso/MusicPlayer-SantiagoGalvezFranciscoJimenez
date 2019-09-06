@@ -30,6 +30,20 @@ $cora.onclick = (e) => {
     $coraColor.classList.toggle('unpressed')
 }
 
+let $shuffle = document.querySelector('.shuffle')
+$shuffle.onclick = (e) => {
+    let $shuffleColor = document.querySelector('.shuffle-color')
+    $shuffleColor.classList.toggle('pressed')
+    $shuffleColor.classList.toggle('unpressed')
+}
+
+let $repeat = document.querySelector('.repeat')
+$repeat.onclick = (e) => {
+    let $repeatColor = document.querySelector('.repeat-color')
+    $repeatColor.classList.toggle('pressed')
+    $repeatColor.classList.toggle('unpressed')
+}
+
 
 
 
