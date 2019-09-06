@@ -14,24 +14,52 @@ body {
         
         width: 370px;
         height: 650px;
+        // -webkit-box-shadow: 0px 3px 30px -15px rgba(0,0,0,0.75);
+        // -moz-box-shadow: 0px 3px 30px -15px rgba(0,0,0,0.75);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+
+
         #top {
             position: relative;
-            .hamburger-menu {
+            
+            .menu {
                 position: absolute;
                 top: 20px;
                 left: 20px;
-                color: white;
+                .menu-color{
+                    fill: #959595;
+                }
+                :hover .menu-color{
+                    fill: #bbb;
+                }
+                svg {
+                        width:16px; 
+                        height:16px; 
+                        cursor: pointer;
+                }
             }
+            
             .search {
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                color: white;
+                .search-color{
+                    fill: #959595;
+                }
+                :hover .search-color{
+                    fill: #bbb;
+                }
+                svg {
+                        width:16px; 
+                        height:16px; 
+                        cursor:pointer;
+                }
             }
             height:55%;
             background-color: black;
             img {
-                height: 100%;
+                width: 100%;
+                max-height: 100%;
             }
         }
         #bottom {
@@ -44,7 +72,11 @@ body {
             align-items:center;
             #repro {
                 height: auto;
-                width: auto;
+                width: 100%;
+                display: flex;
+                flex-flow:column;
+                justify-content: center;
+                align-items: center;
                 #song{
                     display:flex;
                     flex-flow: column;
@@ -59,7 +91,7 @@ body {
                     }
                     h5{
                         width: auto;
-                        color: white;
+                        color: #777777;
                         font-family: 'Open Sans';
                         font-size: 11px;
                         font-weight: 400;
@@ -70,28 +102,35 @@ body {
                     margin-top: 50px;
                     display: flex;
                     height: auto;
+                    width: 50%;
                     justify-content: space-between;
-                    .svg {
-                        height: 24px;
-                        max-width: 24px;
-                        .play{
-                            height: 31px;
-                            
-                            path{
-                                height: 31px;
-                            }
+                    svg {
+                        width:32px; 
+                        height:32px; 
+                        cursor: pointer;
+                        .back{
+                            fill: white;
+                        }
+                        .back:hover{
+                            fill: #bbb;
                         }
 
+                        .play{
+                            fill: white;
+                        }
+                        .play:hover{
+                            fill: #bbb;
+                        }
                         .next{
-                            height: 100%;
-                            max-width: 42px;
-                            path{
-                                max-width: 24px;
-                            }
+                            fill: white;
+                        }
+                        .next:hover{
+                            fill: #bbb;
                         }
                     }
                 }
             }
+        }
             footer {
                 position: absolute;
                 bottom: 0px;
@@ -100,15 +139,45 @@ body {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                svg {
+                        width:15px; 
+                        height:15px; 
+                        cursor: pointer;
+                }
                 .cora {
                     padding-left: 30px;
                 }
+                .cora-color{
+                        fill: #ff564c;
+                }
+                .cora:hover .cora-color{
+                    fill:#bbb;
+                }
+
+                .shuffle-color{
+                        fill: #6d6d6d;
+                }
+                .shuffle:hover .shuffle-color{
+                        fill: #bbb;
+                }
+                .repeat-color{
+                        fill: #ff564c;
+                }
+                .repeat:hover .repeat-color{
+                        fill: #bbb;
+                }
                 .dots {
                     padding-right: 30px;
+                }
+                .dots-color{
+                    fill: #6d6d6d;
+                }
+                .dots:hover .dots-color{
+                    fill: #bbb;
                 }
             }
         }
         
     }
-}
+
 

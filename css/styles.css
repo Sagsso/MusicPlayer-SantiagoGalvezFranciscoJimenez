@@ -13,26 +13,48 @@ body {
 body #container {
   width: 370px;
   height: 650px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
 }
 body #container #top {
   position: relative;
   height: 55%;
   background-color: black;
 }
-body #container #top .hamburger-menu {
+body #container #top .menu {
   position: absolute;
   top: 20px;
   left: 20px;
-  color: white;
+}
+body #container #top .menu .menu-color {
+  fill: #959595;
+}
+body #container #top .menu :hover .menu-color {
+  fill: #bbb;
+}
+body #container #top .menu svg {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 body #container #top .search {
   position: absolute;
   top: 20px;
   right: 20px;
-  color: white;
+}
+body #container #top .search .search-color {
+  fill: #959595;
+}
+body #container #top .search :hover .search-color {
+  fill: #bbb;
+}
+body #container #top .search svg {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 body #container #top img {
-  height: 100%;
+  width: 100%;
+  max-height: 100%;
 }
 body #container #bottom {
   position: relative;
@@ -45,7 +67,11 @@ body #container #bottom {
 }
 body #container #bottom #repro {
   height: auto;
-  width: auto;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 body #container #bottom #repro #song {
   display: flex;
@@ -62,7 +88,7 @@ body #container #bottom #repro #song h1 {
 }
 body #container #bottom #repro #song h5 {
   width: auto;
-  color: white;
+  color: #777777;
   font-family: "Open Sans";
   font-size: 11px;
   font-weight: 400;
@@ -71,26 +97,33 @@ body #container #bottom #repro #controls {
   margin-top: 50px;
   display: flex;
   height: auto;
+  width: 50%;
   justify-content: space-between;
 }
-body #container #bottom #repro #controls .svg {
-  height: 24px;
-  max-width: 24px;
+body #container #bottom #repro #controls svg {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
 }
-body #container #bottom #repro #controls .svg .play {
-  height: 31px;
+body #container #bottom #repro #controls svg .back {
+  fill: white;
 }
-body #container #bottom #repro #controls .svg .play path {
-  height: 31px;
+body #container #bottom #repro #controls svg .back:hover {
+  fill: #bbb;
 }
-body #container #bottom #repro #controls .svg .next {
-  height: 100%;
-  max-width: 42px;
+body #container #bottom #repro #controls svg .play {
+  fill: white;
 }
-body #container #bottom #repro #controls .svg .next path {
-  max-width: 24px;
+body #container #bottom #repro #controls svg .play:hover {
+  fill: #bbb;
 }
-body #container #bottom footer {
+body #container #bottom #repro #controls svg .next {
+  fill: white;
+}
+body #container #bottom #repro #controls svg .next:hover {
+  fill: #bbb;
+}
+body #container footer {
   position: absolute;
   bottom: 0px;
   height: 20%;
@@ -99,11 +132,40 @@ body #container #bottom footer {
   justify-content: space-between;
   align-items: center;
 }
-body #container #bottom footer .cora {
+body #container footer svg {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+body #container footer .cora {
   padding-left: 30px;
 }
-body #container #bottom footer .dots {
+body #container footer .cora-color {
+  fill: #ff564c;
+}
+body #container footer .cora:hover .cora-color {
+  fill: #bbb;
+}
+body #container footer .shuffle-color {
+  fill: #6d6d6d;
+}
+body #container footer .shuffle:hover .shuffle-color {
+  fill: #bbb;
+}
+body #container footer .repeat-color {
+  fill: #ff564c;
+}
+body #container footer .repeat:hover .repeat-color {
+  fill: #bbb;
+}
+body #container footer .dots {
   padding-right: 30px;
+}
+body #container footer .dots-color {
+  fill: #6d6d6d;
+}
+body #container footer .dots:hover .dots-color {
+  fill: #bbb;
 }
 
 /*# sourceMappingURL=styles.css.map */
