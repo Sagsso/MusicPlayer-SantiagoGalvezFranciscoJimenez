@@ -26,15 +26,11 @@ $btnRepro.onclick = (e) => {
 let $cora = document.querySelector('.cora')
 $cora.onclick = (e) => {
     let $coraColor = document.querySelector('.cora-color')
-    if ($coraColor.classList.contains('pressed')) {
-        document.querySelector('.cora-color').style.fill = '#6d6d6d'
-    } else {
-        document.querySelector('.cora-color').style.fill = '#ff564c'
-    }
     $coraColor.classList.toggle('pressed')
     $coraColor.classList.toggle('unpressed')
-
 }
+
+
 
 
 

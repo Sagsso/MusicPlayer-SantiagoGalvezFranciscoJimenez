@@ -149,45 +149,38 @@ body {
                 .cora {
                     padding-left: 30px;
                 }
-                .cora-color{
-                        fill: $colorPressed;
-                }
+                
                 .cora:hover .cora-color{
                     fill:#bbb;
                 }
 
-                .shuffle-color{
-                        fill: #6d6d6d;
-                }
+                
                 .shuffle:hover .shuffle-color{
                         fill: #bbb;
                 }
-                .repeat-color{
-                        fill: $colorPressed;
-                }
+                
                 .repeat:hover .repeat-color{
                         fill: #bbb;
                 }
                 .dots {
                     padding-right: 30px;
                 }
-                .dots-color{
-                    fill: #6d6d6d;
-                }
+                
                 .dots:hover .dots-color{
                     fill: #bbb;
+                }
+                .pressed {
+                    fill: $colorPressed;
+                }
+
+                .unpressed{
+                     fill:$colorUnpressed;
                 }
             }
         }
         
     }
 
-    .pressed {
-        fill: $colorPressed;
-    }
 
-    .unpressed{
-        fill:$colorUnpressed;
-    }
 
 

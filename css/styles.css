@@ -140,20 +140,11 @@ body #container footer svg {
 body #container footer .cora {
   padding-left: 30px;
 }
-body #container footer .cora-color {
-  fill: #ff564c;
-}
 body #container footer .cora:hover .cora-color {
   fill: #bbb;
 }
-body #container footer .shuffle-color {
-  fill: #6d6d6d;
-}
 body #container footer .shuffle:hover .shuffle-color {
   fill: #bbb;
-}
-body #container footer .repeat-color {
-  fill: #ff564c;
 }
 body #container footer .repeat:hover .repeat-color {
   fill: #bbb;
@@ -161,18 +152,13 @@ body #container footer .repeat:hover .repeat-color {
 body #container footer .dots {
   padding-right: 30px;
 }
-body #container footer .dots-color {
-  fill: #6d6d6d;
-}
 body #container footer .dots:hover .dots-color {
   fill: #bbb;
 }
-
-.pressed {
+body #container footer .pressed {
   fill: #ff564c;
 }
-
-.unpressed {
+body #container footer .unpressed {
   fill: #6d6d6d;
 }
 
