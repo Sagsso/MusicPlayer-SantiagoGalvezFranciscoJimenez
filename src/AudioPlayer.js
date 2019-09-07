@@ -22,4 +22,8 @@ class AudioPlayer {
         this.audio.pause()
     }
 
+    getReproductorDOM() {
+        return this.reproductorDOM;
+    }
+
 }

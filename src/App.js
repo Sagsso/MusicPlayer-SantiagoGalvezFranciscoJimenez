@@ -1,5 +1,6 @@
 const play = '<path class="play" fill="#ffffff" d="M3 2l10 6-10 6z"></path>'
 const pause = '<path class="pause" fill="#ffffff" d="M2 2h5v12h-5zM9 2h5v12h-5z"></path>'
+
 let $btnRepro = document.getElementById('btn-repro')
 let $stressedOut = new AudioPlayer($btnRepro)
 

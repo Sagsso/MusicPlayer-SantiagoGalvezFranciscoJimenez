@@ -131,19 +131,13 @@ body #container footer {
   height: 20%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 body #container footer svg {
   width: 15px;
   height: 15px;
   cursor: pointer;
-}
-body #container footer #cora {
-  padding-left: 30px;
-}
-body #container footer #dots {
-  padding-right: 30px;
 }
 body #container footer .pressed {
   fill: #ff564c;
