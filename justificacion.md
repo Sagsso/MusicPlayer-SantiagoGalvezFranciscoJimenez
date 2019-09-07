@@ -28,13 +28,17 @@ En primera instancia se dividió el reproductor en dos partes: top y bottom.
 
 ![](assets/images/container.png)
 
-#top
+# top
 ![](assets/images/top.png)
->   height: 55%;
+```
+ height: 55%;
+```
 
-#bottom
+# bottom
 ![](assets/images/bottom.png)
->   height: 45%;
+```
+   height: 45%;
+```
 
 # Display flex como gran ayuda
 
@@ -44,16 +48,17 @@ ya que nos permitía ubicar los elementos hijos como en el modelo a seguir de un
 Por ejemplo:
 
 ![](assets/images/controls.png)
-
->   display: flex;
->   justify-content: space-between;
-
+```
+   display: flex;
+  justify-content: space-between;
+```
 
 ![](assets/images/footer.png)
-
- >  display: flex;
- >  align-items: center;
- >  justify-content: space-around;
+```
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+```
 
 >A diferencia del ejemplo anterior, se usa space-around para que también haya una separación con el borde de su
 >contenedor y así evitar usar un padding en los laterales.
