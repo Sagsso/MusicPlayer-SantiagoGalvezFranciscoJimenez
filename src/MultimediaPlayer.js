@@ -12,7 +12,7 @@ class MultimediaPlayer extends DOMGui {
         this._DOMElements = {
             play: undefined,
             next: undefined,
-            prev: undefined,
+            back: undefined,
             title: undefined,
             artist: undefined,
             album: undefined,
@@ -51,6 +51,7 @@ class MultimediaPlayer extends DOMGui {
             () => {
                 this.changePlayingSong(this.currentTrack + 1);
             });
+            
 
         this.addButtonListener('progressBar',
             (e) => {
@@ -59,6 +60,11 @@ class MultimediaPlayer extends DOMGui {
                 let progress = position / totalW;
                 this.updateProgressBar(progress * 100);
                 this.audio.currentTime = this.audio.duration * progress;
+            });
+
+        this.addButtonListener('back',
+            () => {
+                this.changePlayingSong(this.currentTrack + 1);
             });
     }
 
@@ -99,4 +105,5 @@ class MultimediaPlayer extends DOMGui {
     updateProgressBar(progress) {
         this._DOMElements.progressBar.querySelector('.fillProgress').style.width = `${progress}%`;
     }
+    
 }

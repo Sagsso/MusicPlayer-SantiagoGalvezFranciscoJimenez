@@ -14,7 +14,7 @@ for (let i = 0; i < trackElements.length; i++) {
 let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
     play: document.querySelector('#btn-repro'),
     next: document.querySelector('#next'),
-    prev: document.querySelector('#back'),
+    back: document.querySelector('#back'),
     title: document.querySelector('#title'),
     artist: document.querySelector('#artist'),
     album: document.querySelector('#album'),
