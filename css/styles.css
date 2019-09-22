@@ -6,59 +6,78 @@
 
 body {
   display: flex;
+  align-items: center;
   justify-content: center;
   background-color: #ff564c;
-  padding: 30px;
+  width: 100vw;
+  height: 100vh;
 }
 body #container {
   width: 370px;
   height: 650px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  position: relative;
 }
-body #container #top {
+body #container audio {
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+body #container #main {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease-in-out;
+}
+body #container #main.show {
+  transform: translateX(185px);
+  transition: transform 0.4s ease-in-out;
+}
+body #container #main #top {
   position: relative;
   display: flex;
   align-items: center;
   height: 55%;
   background-color: black;
 }
-body #container #top .menu {
+body #container #main #top .menu {
   position: absolute;
   top: 20px;
   left: 20px;
 }
-body #container #top .menu .menu-color {
+body #container #main #top .menu .menu-color {
   fill: #959595;
 }
-body #container #top .menu :hover .menu-color {
+body #container #main #top .menu :hover .menu-color {
   fill: #bbb;
 }
-body #container #top .menu svg {
+body #container #main #top .menu svg {
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
-body #container #top .search {
+body #container #main #top .search {
   position: absolute;
   top: 20px;
   right: 20px;
 }
-body #container #top .search .search-color {
+body #container #main #top .search .search-color {
   fill: #959595;
 }
-body #container #top .search :hover .search-color {
+body #container #main #top .search :hover .search-color {
   fill: #bbb;
 }
-body #container #top .search svg {
+body #container #main #top .search svg {
   width: 16px;
   height: 16px;
   cursor: pointer;
 }
-body #container #top img {
+body #container #main #top img {
   width: 100%;
   max-height: 100%;
 }
-body #container #bottom {
+body #container #main #bottom {
   position: relative;
   height: 45%;
   background-color: #111;
@@ -67,7 +86,7 @@ body #container #bottom {
   justify-content: center;
   align-items: center;
 }
-body #container #bottom #repro {
+body #container #main #bottom #repro {
   height: auto;
   width: 100%;
   display: flex;
@@ -75,57 +94,84 @@ body #container #bottom #repro {
   justify-content: center;
   align-items: center;
 }
-body #container #bottom #repro #song {
+body #container #main #bottom #repro #song {
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
 }
-body #container #bottom #repro #song h1 {
+body #container #main #bottom #repro #song h1 {
   width: auto;
   color: white;
   font-family: "Open Sans";
   font-size: 14px;
   font-weight: 700;
 }
-body #container #bottom #repro #song h5 {
+body #container #main #bottom #repro #song h5 {
   width: auto;
   color: #777777;
   font-family: "Open Sans";
   font-size: 11px;
   font-weight: 400;
 }
-body #container #bottom #repro #controls {
-  margin-top: 50px;
+body #container #main #bottom #repro #controls {
+  margin: 25px 0;
   display: flex;
   height: auto;
   width: 50%;
   justify-content: space-between;
 }
-body #container #bottom #repro #controls svg {
+body #container #main #bottom #repro #controls svg {
   width: 32px;
   height: 32px;
   cursor: pointer;
 }
-body #container #bottom #repro #controls svg .back {
+body #container #main #bottom #repro #controls svg .back {
   fill: white;
 }
-body #container #bottom #repro #controls svg .back:hover {
+body #container #main #bottom #repro #controls svg .back:hover {
   fill: #bbb;
 }
-body #container #bottom #repro #controls svg .play {
+body #container #main #bottom #repro #controls svg .play {
   fill: white;
 }
-body #container #bottom #repro #controls svg .play:hover {
+body #container #main #bottom #repro #controls svg .play:hover {
   fill: #bbb;
 }
-body #container #bottom #repro #controls svg .next {
+body #container #main #bottom #repro #controls svg .next {
   fill: white;
 }
-body #container #bottom #repro #controls svg .next:hover {
+body #container #main #bottom #repro #controls svg .next:hover {
   fill: #bbb;
 }
-body #container footer {
+body #container #main #bottom #repro #progressContainer {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+body #container #main #bottom #repro #progressContainer .currentTime, body #container #main #bottom #repro #progressContainer .totalTime {
+  width: auto;
+  color: #777777;
+  font-family: "Open Sans";
+  font-size: 11px;
+  font-weight: 400;
+}
+body #container #main #bottom #repro #progressContainer .progressBar {
+  cursor: pointer;
+  width: 65%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #bbb;
+}
+body #container #main #bottom #repro #progressContainer .progressBar .fillProgress {
+  width: 0%;
+  height: 100%;
+  background-color: #ff564c;
+  border-radius: 3px;
+}
+body #container #main footer {
   position: absolute;
   bottom: 0px;
   height: 20%;
@@ -134,16 +180,64 @@ body #container footer {
   justify-content: space-around;
   align-items: center;
 }
-body #container footer svg {
+body #container #main footer svg {
   width: 15px;
   height: 15px;
   cursor: pointer;
 }
-body #container footer .pressed {
+body #container #main footer .pressed {
   fill: #ff564c;
 }
-body #container footer .unpressed {
+body #container #main footer .unpressed {
   fill: #6d6d6d;
+}
+body ol#playlist {
+  width: 370px;
+  height: 325px;
+  position: absolute;
+  top: 162.5px;
+  background-color: #111;
+  list-style-type: none;
+  transition: transform 0.4s ease-in-out, 0s box-shadow 0.05s;
+}
+body ol#playlist:hover {
+  cursor: pointer;
+}
+body ol#playlist li {
+  height: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body ol#playlist li.playing {
+  background-color: #000;
+}
+body ol#playlist li.playing a, body ol#playlist li.playing span {
+  color: #ff564c;
+}
+body ol#playlist li a {
+  text-decoration: none;
+  color: black;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: auto;
+  color: white;
+}
+body ol#playlist li span {
+  color: white;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 700;
+}
+body ol#playlist.show {
+  transform: translateX(-185px);
+  transition: transform 0.4s ease-in-out, 0s box-shadow 0.05s;
 }
 
 @media (max-width: 375px) {
