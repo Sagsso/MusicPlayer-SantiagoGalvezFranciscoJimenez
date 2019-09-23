@@ -200,9 +200,6 @@ body ol#playlist {
   list-style-type: none;
   transition: transform 0.4s ease-in-out, 0s box-shadow 0.05s;
 }
-body ol#playlist:hover {
-  cursor: pointer;
-}
 body ol#playlist li {
   height: 50px;
   display: flex;
@@ -213,13 +210,16 @@ body ol#playlist li {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+body ol#playlist li:hover {
+  cursor: pointer;
+}
 body ol#playlist li.playing {
   background-color: #000;
 }
-body ol#playlist li.playing a, body ol#playlist li.playing span {
+body ol#playlist li.playing source, body ol#playlist li.playing span {
   color: #ff564c;
 }
-body ol#playlist li a {
+body ol#playlist li source {
   text-decoration: none;
   color: black;
   width: 300px;

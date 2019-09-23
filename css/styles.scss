@@ -211,17 +211,18 @@ body {
         background-color: #111;
         list-style-type: none;
         transition: transform 0.4s ease-in-out, 0s box-shadow 0.05s;
-                &:hover {
+                
+                li {
+                    &:hover {
                     cursor: pointer;
                 }
-                li {
                     &.playing{
                         background-color: #000;
-                        a, span {
+                        source, span {
                             color: $colorPressed;
                         }
                     }
-                    a {
+                    source {
                         text-decoration: none;
                         color: black;
                         // display: inline-block;

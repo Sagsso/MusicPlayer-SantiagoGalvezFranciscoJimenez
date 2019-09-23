@@ -8,7 +8,7 @@ let tracks = []
 
 let trackElements = document.getElementsByClassName('track');
 for (let i = 0; i < trackElements.length; i++) {
-    tracks.push(trackElements[i].href);
+    tracks.push(trackElements[i].src);
 }
 
 let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
@@ -18,6 +18,8 @@ let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
     title: document.querySelector('#title'),
     artist: document.querySelector('#artist'),
     album: document.querySelector('#album'),
+    currentTime: document.querySelector('.currentTime'),
+    totalTime: document.querySelector('.totalTime'),
     cover: document.querySelector('#top'),
     playlistMenu: document.querySelector('#playlist'),
     progressBar: document.querySelector('.progressBar'),

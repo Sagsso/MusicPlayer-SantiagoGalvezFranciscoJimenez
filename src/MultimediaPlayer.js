@@ -3,7 +3,7 @@ class MultimediaPlayer extends DOMGui {
     constructor(audioTagSelector, tracks, guiParams = undefined) {
         super();
 
-        this.audio = document.querySelector(audioTagSelector);
+        this._audio = document.querySelector(audioTagSelector);
         this.tracks = tracks;
         this.audio.src = this.tracks[0];
         this.currentTrack = 0;
@@ -24,13 +24,22 @@ class MultimediaPlayer extends DOMGui {
         }
         this.setDOMElements(guiParams);
         this.addListeners();
+        this.addPlaylistListener();
         this.setPlayerInfo();
+        window.onload = () => {
+        }
+    }
+
+    get audio() {
+        return this._audio;
     }
 
     addListeners() {
 
         this.startTimeUpdateListener();
-
+        this.audio.onloadedmetadata = () => {
+            this._DOMElements.totalTime.innerHTML = this.formatCurrentTime(this.audio.duration);
+        }
         this.addButtonListener('play',
             () => {
                 if (this.audio.paused) {
@@ -51,7 +60,7 @@ class MultimediaPlayer extends DOMGui {
             () => {
                 this.changePlayingSong(this.currentTrack + 1);
             });
-            
+
 
         this.addButtonListener('progressBar',
             (e) => {
@@ -64,12 +73,43 @@ class MultimediaPlayer extends DOMGui {
 
         this.addButtonListener('back',
             () => {
-                this.changePlayingSong(this.currentTrack + 1);
+                this.changePlayingSong(this.currentTrack - 1);
             });
     }
 
     addButtonListener(btnName, callback) {
         this._DOMElements[btnName].onclick = callback;
+    }
+
+    addPlaylistListener() {
+        let songs = this._DOMElements['playlistMenu'];
+        console.log(songs.children.length)
+        for (let i = 0; i < songs.children.length; i++) {
+            songs.children[i].onclick = () => {
+                for (let j = 0; j < songs.children.length; j++) {
+                    songs.children[j].classList.remove('playing')
+                }
+                songs.children[i].classList.add('playing')
+                this.changePlayingSong(i)
+                console.log('Click in song')
+            };
+
+        }
+    }
+
+    play() {
+        if (this.audio.paused) {
+            this.audio.play();
+            this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
+            $btnRepro.innerHTML = pause
+        } else {
+            this.audio.pause();
+            this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
+            $btnRepro.innerHTML = play
+        }
+
+        this._DOMElements.play.classList.toggle('btn-play');
+        this._DOMElements.play.classList.toggle('btn-pause');
     }
 
     changePlayingSong(index) {
@@ -79,7 +119,8 @@ class MultimediaPlayer extends DOMGui {
             this.currentTrack = 0;
         }
         this.audio.src = this.tracks[this.currentTrack];
-        this.audio.play();
+        // this.audio.play();
+        this.play();
         let playing = this._DOMElements.playlistMenu.querySelector('.playing');
         playing.classList.remove('playing');
         let element = this._DOMElements.playlistMenu.children[this.currentTrack];
@@ -99,11 +140,32 @@ class MultimediaPlayer extends DOMGui {
             let current = this.audio.currentTime;
             let progress = current / total;
             this.updateProgressBar(progress * 100);
+            this._DOMElements.currentTime.innerHTML = this.formatCurrentTime(current);
         }
+    }
+
+    formatCurrentTime(currentTime) {
+
+        let rounded = Math.round(currentTime)
+        let minutes = Math.floor(rounded / 60)
+
+        // console.log(rounded)
+        let result = "";
+
+        if (rounded < 10) {
+            result = `${minutes}:0${rounded}`;
+        } else if (rounded >= 10 && rounded < 59) {
+            result = `${minutes}:${rounded}`;
+        } else if (rounded > 60) {
+            rounded = Math.floor(rounded % 60)
+            result = (rounded < 10) ? `${minutes}:0${rounded}` : `${minutes}:${rounded}`
+            // result = `${minutes}:${rounded}`;
+        }
+        return result;
     }
 
     updateProgressBar(progress) {
         this._DOMElements.progressBar.querySelector('.fillProgress').style.width = `${progress}%`;
     }
-    
+
 }
