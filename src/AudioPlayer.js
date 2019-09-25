@@ -1,25 +1,39 @@
 
 class AudioPlayer {
 
-    constructor(btnPlay) {
-        console.log(btnPlay.getAttribute("src"))
-        this.audio = document.createElement("audio");
-        this.source = document.createElement("source");
-        this.source.src = `./${btnPlay.getAttribute("src")}`;
-        this.audio.appendChild(this.source);
+    constructor(audioTagSelector, src) {
+        this._audio = document.querySelector(audioTagSelector);
+        this.audio.src = src;
         this.audio.volume = 1;
-        this.reproductorDOM = document.getElementById('container');
+        this.availableFormats = ['mp3', 'wav', 'ogg', 'aif'];
     }
 
+    get audio() {
+        return this._audio;
+    }
 
     play() {
-        this.audio.play().catch(function (e) {
-            console.log(e);
-        });
+        if (this.verifyType()) {
+            this.audio.play()
+        } else {
+            console.log('Not available')
+        }
     }
 
     pause() {
         this.audio.pause()
+    }
+
+    verifyType() {
+        let res = this.audio.src.split(".")[1];
+        let response = false;
+        this.availableFormats.forEach(element => {
+            if (element == res) {
+                response = true;
+            }
+        });
+        return response;
+
     }
 
     getReproductorDOM() {

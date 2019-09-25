@@ -3,9 +3,8 @@ class MultimediaPlayer extends DOMGui {
     constructor(audioTagSelector, tracks, guiParams = undefined) {
         super();
 
-        this._audio = document.querySelector(audioTagSelector);
         this.tracks = tracks;
-        this.audio.src = this.tracks[0].src;
+        this._audioPlayer = new AudioPlayer(audioTagSelector, this.tracks[0].src);
         this.currentTrack = 0;
 
 
@@ -27,30 +26,28 @@ class MultimediaPlayer extends DOMGui {
         this.addListeners();
         this.addPlaylistListener();
         this.setPlayerInfo();
-        window.onload = () => {
-        }
     }
 
-    get audio() {
-        return this._audio;
+    get audioPlayer() {
+        return this._audioPlayer;
     }
 
     addListeners() {
 
         this.startTimeUpdateListener();
-        this.audio.onloadedmetadata = () => {
-            this._DOMElements.totalTime.innerHTML = this.formatCurrentTime(this.audio.duration);
+        this.audioPlayer.audio.onloadedmetadata = () => {
+            this._DOMElements.totalTime.innerHTML = this.formatCurrentTime(this.audioPlayer.audio.duration);
             this._DOMElements.loading.classList.remove('loading');
 
         }
         this.addButtonListener('play',
             () => {
-                if (this.audio.paused) {
-                    this.audio.play();
+                if (this.audioPlayer.audio.paused) {
+                    this.audioPlayer.play();
                     this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
                     this._DOMElements.play.innerHTML = pause
                 } else {
-                    this.audio.pause();
+                    this.audioPlayer.pause();
                     this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
                     this._DOMElements.play.innerHTML = play
                 }
@@ -71,7 +68,7 @@ class MultimediaPlayer extends DOMGui {
                 let totalW = 240;
                 let progress = position / totalW;
                 this.updateProgressBar(progress * 100);
-                this.audio.currentTime = this.audio.duration * progress;
+                this.audioPlayer.audio.currentTime = this.audioPlayer.audio.duration * progress;
             });
 
         this.addButtonListener('back',
@@ -105,12 +102,12 @@ class MultimediaPlayer extends DOMGui {
     }
 
     play() {
-        if (this.audio.paused) {
-            this.audio.play();
+        if (this.audioPlayer.audio.paused) {
+            this.audioPlayer.play();
             this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
             this._DOMElements.play.innerHTML = pause
         } else {
-            this.audio.pause();
+            this.audioPlayer.pause();
             this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
             this._DOMElements.play.innerHTML = play
         }
@@ -125,7 +122,7 @@ class MultimediaPlayer extends DOMGui {
         } else {
             this.currentTrack = 0;
         }
-        this.audio.src = this.tracks[this.currentTrack].src;
+        this.audioPlayer.audio.src = this.tracks[this.currentTrack].src;
         this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img}')`;
         // this.audio.play();
         this.play();
@@ -146,14 +143,14 @@ class MultimediaPlayer extends DOMGui {
     }
 
     startTimeUpdateListener() {
-        this.audio.ontimeupdate = () => {
-            let total = this.audio.duration;
-            let current = this.audio.currentTime;
+        this.audioPlayer.audio.ontimeupdate = () => {
+            let total = this.audioPlayer.audio.duration;
+            let current = this.audioPlayer.audio.currentTime;
             let progress = current / total;
             this.updateProgressBar(progress * 100);
             this._DOMElements.currentTime.innerHTML = this.formatCurrentTime(current);
 
-            if (current == total && this.audio.paused) {
+            if (current == total && this.audioPlayer.audio.paused) {
                 this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
                 this._DOMElements.play.innerHTML = play
                 let nextTrack = this.currentTrack + 1;
