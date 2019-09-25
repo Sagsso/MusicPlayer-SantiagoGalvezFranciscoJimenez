@@ -21,6 +21,7 @@ class MultimediaPlayer extends DOMGui {
             totalTime: undefined,
             progressBar: undefined,
             playlistMenu: undefined,
+            loading: undefined
         }
         this.setDOMElements(guiParams);
         this.addListeners();
@@ -39,6 +40,8 @@ class MultimediaPlayer extends DOMGui {
         this.startTimeUpdateListener();
         this.audio.onloadedmetadata = () => {
             this._DOMElements.totalTime.innerHTML = this.formatCurrentTime(this.audio.duration);
+            this._DOMElements.loading.classList.remove('loading');
+
         }
         this.addButtonListener('play',
             () => {
@@ -126,6 +129,7 @@ class MultimediaPlayer extends DOMGui {
         this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img}')`;
         // this.audio.play();
         this.play();
+        this._DOMElements.loading.classList.add('loading');
         let playing = this._DOMElements.playlistMenu.querySelector('.playing');
         playing.classList.remove('playing');
         let element = this._DOMElements.playlistMenu.children[this.currentTrack];

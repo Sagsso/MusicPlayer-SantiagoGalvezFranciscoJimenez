@@ -3,6 +3,7 @@ const pause = '<path class="pause" fill="#ffffff" d="M2 2h5v12h-5zM9 2h5v12h-5z"
 
 let tracks = [
     { src: './assets/songs/SummerDays.mp3', img: './assets/images/SummerDays.jpg', title: 'Summer Days', artist: 'Martin Garrix' },
+    { src: './assets/songs/Believer.mp3', img: './assets/images/Believer.jpg', title: 'Believer', artist: 'Imagine Dragons' },
     { src: './assets/songs/Heathens.mp3', img: './assets/images/Heathens.jpg', title: 'Heathens', artist: 'Twenty One Pilots' },
     { src: './assets/songs/UGotThat.mp3', img: './assets/images/UGotThat.jpg', title: 'U Got That', artist: 'Halogen' },
     { src: './assets/songs/OldTownRoad.mp3', img: './assets/images/OldTownRoad.jpeg', title: 'Old Town Road', artist: 'Lil Nas X ft. Ray Cyrus' },
@@ -44,6 +45,7 @@ let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
     cover: document.querySelector('#top'),
     playlistMenu: document.querySelector('#playlist'),
     progressBar: document.querySelector('.progressBar'),
+    loading: document.querySelector('.loading'),
 });
 
 // $btnRepro.onclick = (e) => {
