@@ -13,6 +13,7 @@ class MultimediaPlayer extends DOMGui {
             next: undefined,
             back: undefined,
             title: undefined,
+            shuffle: undefined,
             artist: undefined,
             album: undefined,
             cover: undefined,
@@ -78,6 +79,11 @@ class MultimediaPlayer extends DOMGui {
                 } else {
                     this.changePlayingSong(this.tracks.length - 1);
                 }
+            });
+        
+        this.addButtonListener('shuffle',
+            () => {
+                
             });
     }
 

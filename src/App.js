@@ -3,7 +3,9 @@ const pause = '<path class="pause" fill="#ffffff" d="M2 2h5v12h-5zM9 2h5v12h-5z"
 
 let tracks = [
     { src: './assets/songs/SummerDays.mp3', img: './assets/images/SummerDays.jpg', title: 'Summer Days', artist: 'Martin Garrix', totalTime:'2:44' },
+    { src: './assets/songs/Chuck_Berry_Is_on_Top.mp3', img: './assets/images/Chuck_Berry_Is_on_Top.jpg', title: 'Jhonny B. Goode', artist: 'Chuck Berry Is on Top', totalTime:'2:42' },
     { src: './assets/songs/Believer.mp3', img: './assets/images/Believer.jpg', title: 'Believer', artist: 'Imagine Dragons', totalTime:'3:29' },
+    { src: './assets/songs/Should I Stay Or Should I Go.mp3', img: './assets/images/Should I Stay Or Should I Go.jpg', title: 'Should I Stay Or Should I Go', artist: 'The Clash', totalTime:'3:10' },
     { src: './assets/songs/Heathens.mp3', img: './assets/images/Heathens.jpg', title: 'Heathens', artist: 'Twenty One Pilots', totalTime:'3:11' },
     { src: './assets/songs/UGotThat.mp3', img: './assets/images/UGotThat.jpg', title: 'U Got That', artist: 'Halogen', totalTime:'2:53' },
     { src: './assets/songs/OldTownRoad.mp3', img: './assets/images/OldTownRoad.jpeg', title: 'Old Town Road', artist: 'Lil Nas X ft. Ray Cyrus', totalTime:'2:37' },
@@ -37,6 +39,7 @@ let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
     play: document.querySelector('#btn-repro'),
     next: document.querySelector('#next'),
     back: document.querySelector('#back'),
+    shuffle: document.querySelector('#shuffle'),
     title: document.querySelector('#title'),
     artist: document.querySelector('#artist'),
     album: document.querySelector('#album'),
