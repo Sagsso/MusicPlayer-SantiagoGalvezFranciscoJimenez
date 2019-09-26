@@ -80,10 +80,10 @@ class MultimediaPlayer extends DOMGui {
                     this.changePlayingSong(this.tracks.length - 1);
                 }
             });
-        
+
         this.addButtonListener('shuffle',
             () => {
-                
+
             });
     }
 
@@ -128,7 +128,7 @@ class MultimediaPlayer extends DOMGui {
         } else {
             this.currentTrack = 0;
         }
-        this.audioPlayer.audio.src = src;
+        this.audioPlayer.audio.src = src || this.tracks[this.currentTrack].src;
         this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img}')`;
         // this.audio.play();
         this.play();
