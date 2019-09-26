@@ -13,11 +13,11 @@ class AudioPlayer {
     }
 
     play() {
-        if (this.verifyType()) {
-            this.audio.play()
-        } else {
-            console.log('Not available')
-        }
+        // if (this.verifyType()) {
+        this.audio.play()
+        // } else {
+        //     console.log('Not available')
+        // }
     }
 
     pause() {

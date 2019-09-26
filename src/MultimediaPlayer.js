@@ -100,7 +100,7 @@ class MultimediaPlayer extends DOMGui {
                     songs.children[j].classList.remove('playing')
                 }
                 songs.children[i].classList.add('playing')
-                this.changePlayingSong(i)
+                this.changePlayingSong(i, songs.children[i].src)
                 console.log('Click in song')
             };
 
@@ -122,13 +122,13 @@ class MultimediaPlayer extends DOMGui {
         this._DOMElements.play.classList.toggle('btn-pause');
     }
 
-    changePlayingSong(index) {
+    changePlayingSong(index, src) {
         if (index <= this.tracks.length - 1) {
             this.currentTrack = index;
         } else {
             this.currentTrack = 0;
         }
-        this.audioPlayer.audio.src = this.tracks[this.currentTrack].src;
+        this.audioPlayer.audio.src = src;
         this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img}')`;
         // this.audio.play();
         this.play();
@@ -149,6 +149,7 @@ class MultimediaPlayer extends DOMGui {
     }
 
     startTimeUpdateListener() {
+
         this.audioPlayer.audio.ontimeupdate = () => {
             let total = this.audioPlayer.audio.duration;
             let current = this.audioPlayer.audio.currentTime;
