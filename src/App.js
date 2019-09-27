@@ -116,9 +116,10 @@ function drop(ev) {
     let box = document.getElementById('playlist');
     let files = ev.dataTransfer.files;
 
-    addSong(URL.createObjectURL(files[0]))
-
-    console.log(ev)
+    for (var i = 0, f; f = files[i]; i++){
+    addSong(URL.createObjectURL(files[i]))
+    }
+    //console.log(ev)
 }
 
 function playFile(file) {
