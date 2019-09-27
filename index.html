@@ -5,104 +5,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Music Player - Twenty One Pilots</title>
+    <title>Music Players</title>
     <link rel="stylesheet" href="css/styles.css">
-
+    <script src="./src/DOMGui.js"></script>
+    <script src="./src/AudioPlayer.js"></script>
+    <script src="./src/MultimediaPlayer.js"></script>
 </head>
 
 <body>
 
     <div id="container">
-        <div id="top">
-
-            <div class="menu">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172"
-                    style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                        stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                        font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                        style="mix-blend-mode: normal">
-                        <path d="M0,172v-172h172v172z" fill="none"></path>
-                        <g class="menu-color" fill="#ffffff">
-                            <path
-                                d="M17.2,27.52c-2.48118,-0.03509 -4.78904,1.2685 -6.03987,3.41161c-1.25083,2.1431 -1.25083,4.79369 0,6.93679c1.25083,2.1431 3.55869,3.4467 6.03987,3.41161h137.6c2.48118,0.03509 4.78904,-1.2685 6.03987,-3.41161c1.25083,-2.1431 1.25083,-4.79369 0,-6.93679c-1.25083,-2.1431 -3.55869,-3.4467 -6.03987,-3.41161zM17.2,79.12c-2.48118,-0.03509 -4.78904,1.2685 -6.03987,3.41161c-1.25083,2.1431 -1.25083,4.79369 0,6.93679c1.25083,2.1431 3.55869,3.4467 6.03987,3.41161h137.6c2.48118,0.03509 4.78904,-1.2685 6.03987,-3.41161c1.25083,-2.1431 1.25083,-4.79369 0,-6.93679c-1.25083,-2.1431 -3.55869,-3.4467 -6.03987,-3.41161zM17.2,130.72c-2.48118,-0.03509 -4.78904,1.2685 -6.03987,3.41161c-1.25083,2.1431 -1.25083,4.79369 0,6.93679c1.25083,2.1431 3.55869,3.4467 6.03987,3.41161h137.6c2.48118,0.03509 4.78904,-1.2685 6.03987,-3.41161c1.25083,-2.1431 1.25083,-4.79369 0,-6.93679c-1.25083,-2.1431 -3.55869,-3.4467 -6.03987,-3.41161z">
-                            </path>
-                        </g>
-                    </g>
-                </svg>
-            </div>
-            <div class="search">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966"
-                    style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px"
-                    class="">
-                    <g>
-                        <path class="search-color"
-                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
-                            data-original="#000000" class="active-path" data-old_color="#000000" fill="#B6B6B6" />
-                    </g>
-                </svg>
-            </div>
-            <img src="https://angstyteenwatchingtoomuchtv.files.wordpress.com/2015/07/tumblr_nlhsir3adc1sk2qobo1_12801.gif"
-                alt="">
-        </div>
-        <div id="bottom">
-            <div id="repro">
-                <div id="song">
-                    <h1>STRESSED OUT</h1>
-                    <h5>twenty one pilots- Blurryface</h5>
+        <div id="main">
+            <audio controls></audio>
+            <div id="top">
+                <div class="loading">
+                    <div></div>
+                    <div></div>
                 </div>
-                <div id="controls">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 16 16">
-                        <path class="back" fill="#ffffff" d="M9 2.5v5l5-5v11l-5-5v5l-5.5-5.5z"></path>
+                <div class="menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 172 172"
+                        style=" fill:#000000;">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                            font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            style="mix-blend-mode: normal">
+                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                            <g class="menu-color" fill="#ffffff">
+                                <path
+                                    d="M17.2,27.52c-2.48118,-0.03509 -4.78904,1.2685 -6.03987,3.41161c-1.25083,2.1431 -1.25083,4.79369 0,6.93679c1.25083,2.1431 3.55869,3.4467 6.03987,3.41161h137.6c2.48118,0.03509 4.78904,-1.2685 6.03987,-3.41161c1.25083,-2.1431 1.25083,-4.79369 0,-6.93679c-1.25083,-2.1431 -3.55869,-3.4467 -6.03987,-3.41161zM17.2,79.12c-2.48118,-0.03509 -4.78904,1.2685 -6.03987,3.41161c-1.25083,2.1431 -1.25083,4.79369 0,6.93679c1.25083,2.1431 3.55869,3.4467 6.03987,3.41161h137.6c2.48118,0.03509 4.78904,-1.2685 6.03987,-3.41161c1.25083,-2.1431 1.25083,-4.79369 0,-6.93679c-1.25083,-2.1431 -3.55869,-3.4467 -6.03987,-3.41161zM17.2,130.72c-2.48118,-0.03509 -4.78904,1.2685 -6.03987,3.41161c-1.25083,2.1431 -1.25083,4.79369 0,6.93679c1.25083,2.1431 3.55869,3.4467 6.03987,3.41161h137.6c2.48118,0.03509 4.78904,-1.2685 6.03987,-3.41161c1.25083,-2.1431 1.25083,-4.79369 0,-6.93679c-1.25083,-2.1431 -3.55869,-3.4467 -6.03987,-3.41161z">
+                                </path>
+                            </g>
+                        </g>
                     </svg>
-                    <svg id="btn-repro" class="btn-play" src="assets/audios/StressedOut.mp3" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 16 16">
-                        <path class="play" fill="#ffffff" d="M3 2l10 6-10 6z"></path>
-                    </svg>
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 16 16">
-                        <path class="next" fill="#ffffff" d="M8 13.5v-5l-5 5v-11l5 5v-5l5.5 5.5z"></path>
+                </div>
+                <div class="search">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                        id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                        style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px"
+                        height="512px" class="">
+                        <g>
+                            <path class="search-color"
+                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
+                                data-original="#000000" class="active-path" data-old_color="#000000" fill="#B6B6B6" />
+                        </g>
                     </svg>
                 </div>
             </div>
-            <footer>
-                <svg id="cora" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-                    <path class="cora-color pressed"
-                        d="M11.8 1c-1.682 0-3.129 1.368-3.799 2.797-0.671-1.429-2.118-2.797-3.8-2.797-2.318 0-4.2 1.882-4.2 4.2 0 4.716 4.758 5.953 8 10.616 3.065-4.634 8-6.050 8-10.616 0-2.319-1.882-4.2-4.2-4.2z">
-                    </path>
-                </svg>
-                <svg id="shuffle" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-                    <path class="shuffle-color unpressed"
-                        d="M12 11h-1.586l-2.5-2.5 2.5-2.5h1.586v2.5l3.5-3.5-3.5-3.5v2.5h-2c-0.265 0-0.52 0.105-0.707 0.293l-2.793 2.793-2.793-2.793c-0.188-0.188-0.442-0.293-0.707-0.293h-3v2h2.586l2.5 2.5-2.5 2.5h-2.586v2h3c0.265 0 0.52-0.105 0.707-0.293l2.793-2.793 2.793 2.793c0.188 0.188 0.442 0.293 0.707 0.293h2v2.5l3.5-3.5-3.5-3.5v2.5z">
-                    </path>
-                </svg>
-                <svg id="repeat" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
-                    <path class="repeat-color pressed"
-                        d="M16 6h-6l2.243-2.243c-1.133-1.133-2.64-1.757-4.243-1.757s-3.109 0.624-4.243 1.757c-1.133 1.133-1.757 2.64-1.757 4.243s0.624 3.109 1.757 4.243c1.133 1.133 2.64 1.757 4.243 1.757s3.109-0.624 4.243-1.757c0.095-0.095 0.185-0.192 0.273-0.292l1.505 1.317c-1.466 1.674-3.62 2.732-6.020 2.732-4.418 0-8-3.582-8-8s3.582-8 8-8c2.209 0 4.209 0.896 5.656 2.344l2.343-2.344v6z">
-                    </path>
-                </svg>
-                <svg id="dots" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="612px" height="612px"
-                    viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
-                    <g>
-                        <g class="dots-color unpressed">
-                            <circle cx="69.545" cy="306" r="69.545" />
-                            <circle cx="306" cy="306" r="69.545" />
-                            <circle cx="542.455" cy="306" r="69.545" />
+            <div id="bottom">
+                <div id="repro">
+                    <div id="song">
+                        <h1 id="title"></h1>
+                        <h5><span id="artist"></span></h5>
+                    </div>
+                    <div id="controls">
+                        <svg id="back" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+                            <path class="back" fill="#ffffff" d="M9 2.5v5l5-5v11l-5-5v5l-5.5-5.5z"></path>
+                        </svg>
+                        <svg id="btn-repro" class="btn-play" src="assets/audios/StressedOut.mp3" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 16 16">
+                            <path class="play" fill="#ffffff" d="M3 2l10 6-10 6z"></path>
+                        </svg>
+                        <svg id="next" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16">
+                            <path class="next" fill="#ffffff" d="M8 13.5v-5l-5 5v-11l5 5v-5l5.5 5.5z"></path>
+                        </svg>
+                    </div>
+                    <div id="progressContainer">
+                        <div class="currentTime">0:00</div>
+                        <div class="progressBar">
+                            <div class="fillProgress"></div>
+                        </div>
+                        <div class="totalTime"></div>
+                    </div>
+                </div>
+                <footer>
+                    <svg id="cora" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                        <path class="cora-color pressed"
+                            d="M11.8 1c-1.682 0-3.129 1.368-3.799 2.797-0.671-1.429-2.118-2.797-3.8-2.797-2.318 0-4.2 1.882-4.2 4.2 0 4.716 4.758 5.953 8 10.616 3.065-4.634 8-6.050 8-10.616 0-2.319-1.882-4.2-4.2-4.2z">
+                        </path>
+                    </svg>
+                    <svg id="shuffle" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                        <path class="shuffle-color unpressed"
+                            d="M12 11h-1.586l-2.5-2.5 2.5-2.5h1.586v2.5l3.5-3.5-3.5-3.5v2.5h-2c-0.265 0-0.52 0.105-0.707 0.293l-2.793 2.793-2.793-2.793c-0.188-0.188-0.442-0.293-0.707-0.293h-3v2h2.586l2.5 2.5-2.5 2.5h-2.586v2h3c0.265 0 0.52-0.105 0.707-0.293l2.793-2.793 2.793 2.793c0.188 0.188 0.442 0.293 0.707 0.293h2v2.5l3.5-3.5-3.5-3.5v2.5z">
+                        </path>
+                    </svg>
+                    <svg id="repeat" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+                        <path class="repeat-color pressed"
+                            d="M16 6h-6l2.243-2.243c-1.133-1.133-2.64-1.757-4.243-1.757s-3.109 0.624-4.243 1.757c-1.133 1.133-1.757 2.64-1.757 4.243s0.624 3.109 1.757 4.243c1.133 1.133 2.64 1.757 4.243 1.757s3.109-0.624 4.243-1.757c0.095-0.095 0.185-0.192 0.273-0.292l1.505 1.317c-1.466 1.674-3.62 2.732-6.020 2.732-4.418 0-8-3.582-8-8s3.582-8 8-8c2.209 0 4.209 0.896 5.656 2.344l2.343-2.344v6z">
+                        </path>
+                    </svg>
+                    <svg id="dots" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="612px" height="612px"
+                        viewBox="0 0 612 612" style="enable-background:new 0 0 612 612;" xml:space="preserve">
+                        <g>
+                            <g class="dots-color unpressed">
+                                <circle cx="69.545" cy="306" r="69.545" />
+                                <circle cx="306" cy="306" r="69.545" />
+                                <circle cx="542.455" cy="306" r="69.545" />
+                            </g>
                         </g>
-                    </g>
-                </svg>
-            </footer>
+                    </svg>
+                </footer>
+            </div>
         </div>
+        <ol id="playlist" ondrop="drop(event)" ondragover="allowDrop(event)">
+        </ol>
     </div>
 
-    <script src="src/AudioPlayer.js"></script>
     <script src="src/App.js"></script>
 </body>
 
