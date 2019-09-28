@@ -18,24 +18,17 @@ let tracks = [
     { src: './assets/songs/WalkItTalkIt.mp3', img: './assets/images/WalkItTalkIt.jpg', title: 'Walk It Talk It', artist: 'Migos ft. Drake', totalTime: '4:37' },
 ]
 
-let trackElements = document.getElementsByClassName('track');
-// for (let i = 0; i < trackElements.length; i++) {
-//     tracks.push(trackElements[i].src);
-// }
-
 let $playlist = document.getElementById('playlist')
 for (let i = 0; i < tracks.length; i++) {
     let item = document.createElement('li')
-    item.setAttribute('draggable', 'true')
-    item.setAttribute('ondragstart', 'drag(event)')
-    item.src = tracks[i].src;
-    item.innerHTML = `<span><span class="title" data-index="${i}">${tracks[i].title}</span> -
-                    <span class="artist">${tracks[i].artist}</span></span><span class="totalTime">${tracks[i].totalTime}</span>`;
-    $playlist.appendChild(item);
+    let src = tracks[i].src
+    let title = tracks[i].title
+    let artist = tracks[i].artist
+    let total = tracks[i].totalTime
+    addSong(src, title, artist, total)
 }
 
 $playlist.children[0].classList.add('playing')
-
 
 let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
     play: document.querySelector('#btn-repro'),
@@ -52,6 +45,7 @@ let myAudioPlayer = new MultimediaPlayer('#main audio', tracks, {
     progressBar: document.querySelector('.progressBar'),
     loading: document.querySelector('.loading'),
 });
+
 
 // $btnRepro.onclick = (e) => {
 //     if ($btnRepro.classList.contains('btn-play')) {
@@ -102,37 +96,89 @@ $menu.onclick = (e) => {
 //Drag & Drop functions
 function allowDrop(ev) {
     ev.preventDefault();
+    ev.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+
 }
 let source;
 function drag(ev) {
-    source = ev.target;
-    ev.dataTransfer.setData("text/plain", ev.target.innerHTML);
+    source = this;
+    ev.dataTransfer.setData("text/plain", this.innerHTML);
     ev.dataTransfer.effectAllowed = "move";
 }
-let player = new Audio()
-// player.setAttribute('id', 'newAudio')
-function drop(ev) {
+
+function dropFiles(ev) {
     ev.preventDefault();
     let box = document.getElementById('playlist');
     let files = ev.dataTransfer.files;
 
-    for (var i = 0, f; f = files[i]; i++){
-    addSong(URL.createObjectURL(files[i]))
+    for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let blob = file.slice(file.size - 128, file.size);
+        let reader = new FileReader();
+
+        reader.onload = function (evt) {
+            let buff = evt.target.result;
+            let dataView = new DataView(buff)
+            let src = URL.createObjectURL(files[i]);
+            let title = readString(dataView, 3, 30)
+            let artist = readString(dataView, 33, 30)
+            console.log('TAG:', readString(dataView, 0, 3));
+            console.log('title: ', readString(dataView, 3, 30)); // title
+            console.log('artist: ', readString(dataView, 33, 30)); // artist
+            console.log('album: ', readString(dataView, 63, 30)); // album
+            console.log('year: ', readString(dataView, 93, 4)); // year
+            addSong(src, title, artist)
+        }
+        reader.readAsArrayBuffer(blob);
     }
-    //console.log(ev)
-}
-
-function playFile(file) {
-    player.src = URL.createObjectURL(file)
-}
-function addSong(src) {
-    let item = document.createElement('li')
-    item.setAttribute('draggable', 'true')
-    item.setAttribute('ondragstart', 'drag(event)')
-    item.src = src
-
-    item.innerHTML = `<span><span class="title" data-index="n">NUEVA CANCIÓN</span> -
-                    <span class="artist">clickeame, apenas sueno</span></span><span class="totalTime">totalTime</span>`;
-    $playlist.appendChild(item);
     myAudioPlayer.addPlaylistListener();
+
+}
+
+
+function readString(dataView, offset, length) {
+    let str = '';
+    for (let i = offset; i < offset + length; i++) {
+        str += String.fromCharCode(dataView.getUint8(i));
+    }
+    return str;
+}
+
+function addSong(src, title, artist, total) {
+    let item = document.createElement('li')
+    addDnD(item)
+    item.src = src
+    item.innerHTML = `<span><span class="title" data-index="${$playlist.children.length}">${title}</span> -
+                                                <span class="artist">${artist}</span></span><span class="totalTime">${total}</span>`;
+    $playlist.appendChild(item);
+}
+
+function addDnD(el) {
+    console.log('added')
+    el.setAttribute('draggable', 'true')
+    el.addEventListener('dragstart', drag, false);
+    el.addEventListener('dragover', allowDrop, false);
+    el.addEventListener('drop', handleDrop, false);
+}
+
+function handleDrop(e) {
+
+    if (e.stopPropagation) {
+        e.stopPropagation(); // Stops some browsers from redirecting.
+    }
+
+    // Don't do anything if dropping the same column we're dragging.
+    if (source != this) {
+        // Set the source column's HTML to the HTML of the column we dropped on.
+        //alert(this.outerHTML);
+        //dragSrcEl.innerHTML = this.innerHTML;
+        //this.innerHTML = e.dataTransfer.getData('text/html');
+        let dropHTML = e.dataTransfer.getData('text/html');
+        // this.parentNode.removeChild(source);
+        this.insertAdjacentHTML('beforebegin', dropHTML);
+        console.log(this.previousSibling)
+        let dropElem = this.previousSibling;
+        addDnD(dropElem);
+
+    }
 }
