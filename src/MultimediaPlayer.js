@@ -92,6 +92,8 @@ class MultimediaPlayer extends DOMGui {
     }
 
     addPlaylistListener() {
+        console.log('Eventos de nueva canción añadidos');
+
         let songs = this._DOMElements['playlistMenu'];
         console.log(songs.children.length)
         for (let i = 0; i < songs.children.length; i++) {
@@ -123,14 +125,15 @@ class MultimediaPlayer extends DOMGui {
     }
 
     changePlayingSong(index, src) {
+        console.log(index)
         if (index <= this.tracks.length - 1) {
             this.currentTrack = index;
         } else {
             this.currentTrack = 0;
         }
         this.audioPlayer.audio.src = src || this.tracks[this.currentTrack].src;
-        this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img}')`;
-        // this.audio.play();
+        console.log(this.currentTrack)
+
         this.play();
         this._DOMElements.loading.classList.add('loading');
         let playing = this._DOMElements.playlistMenu.querySelector('.playing');
@@ -145,7 +148,7 @@ class MultimediaPlayer extends DOMGui {
         let element = this._DOMElements.playlistMenu.children[this.currentTrack];
         this._DOMElements.title.innerHTML = element.querySelector('.title').innerHTML;
         this._DOMElements.artist.innerHTML = element.querySelector('.artist').innerHTML;
-        this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img}')`;
+        this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img || './assets/images/noImage.png'}')`;
     }
 
     startTimeUpdateListener() {

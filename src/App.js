@@ -111,27 +111,45 @@ function dropFiles(ev) {
     let box = document.getElementById('playlist');
     let files = ev.dataTransfer.files;
 
-    for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        let blob = file.slice(file.size - 128, file.size);
-        let reader = new FileReader();
+    if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            let blob = file.slice(file.size - 128, file.size);
+            let reader = new FileReader();
 
-        reader.onload = function (evt) {
-            let buff = evt.target.result;
-            let dataView = new DataView(buff)
-            let src = URL.createObjectURL(files[i]);
-            let title = readString(dataView, 3, 30)
-            let artist = readString(dataView, 33, 30)
-            console.log('TAG:', readString(dataView, 0, 3));
-            console.log('title: ', readString(dataView, 3, 30)); // title
-            console.log('artist: ', readString(dataView, 33, 30)); // artist
-            console.log('album: ', readString(dataView, 63, 30)); // album
-            console.log('year: ', readString(dataView, 93, 4)); // year
-            addSong(src, title, artist)
+            reader.onload = function (evt) {
+                let buff = evt.target.result;
+                let dataView = new DataView(buff)
+                let src = URL.createObjectURL(files[i]);
+                let title = readString(dataView, 3, 30)
+                let artist = readString(dataView, 33, 30)
+                console.log('TAG:', readString(dataView, 0, 3));
+                console.log('title: ', readString(dataView, 3, 30)); // title
+                console.log('artist: ', readString(dataView, 33, 30)); // artist
+                console.log('album: ', readString(dataView, 63, 30)); // album
+                console.log('year: ', readString(dataView, 93, 4)); // year
+                addSong(src, title, artist)
+                let obj = {
+                    src: src,
+                    img: null,
+                    title: title,
+                    artist: artist,
+                    totalTime: null
+                }
+                tracks.push(obj)
+                myAudioPlayer.addPlaylistListener();
+            }
+            reader.readAsArrayBuffer(blob);
         }
-        reader.readAsArrayBuffer(blob);
+    } else {
+        if (ev.target.localName === 'li') {
+
+            ev.target.insertAdjacentElement('beforebegin', source)
+            // source.innerHTML = ev.target.innerHTML;
+            // ev.target.innerHTML = ev.dataTransfer.getData("text/plain");
+        }
     }
-    myAudioPlayer.addPlaylistListener();
+
 
 }
 
@@ -151,34 +169,33 @@ function addSong(src, title, artist, total) {
     item.innerHTML = `<span><span class="title" data-index="${$playlist.children.length}">${title}</span> -
                                                 <span class="artist">${artist}</span></span><span class="totalTime">${total}</span>`;
     $playlist.appendChild(item);
+
 }
 
 function addDnD(el) {
     console.log('added')
     el.setAttribute('draggable', 'true')
     el.addEventListener('dragstart', drag, false);
-    el.addEventListener('dragover', allowDrop, false);
-    el.addEventListener('drop', handleDrop, false);
 }
 
-function handleDrop(e) {
+// function handleDrop(e) {
 
-    if (e.stopPropagation) {
-        e.stopPropagation(); // Stops some browsers from redirecting.
-    }
+//     if (e.stopPropagation) {
+//         e.stopPropagation(); // Stops some browsers from redirecting.
+//     }
 
-    // Don't do anything if dropping the same column we're dragging.
-    if (source != this) {
-        // Set the source column's HTML to the HTML of the column we dropped on.
-        //alert(this.outerHTML);
-        //dragSrcEl.innerHTML = this.innerHTML;
-        //this.innerHTML = e.dataTransfer.getData('text/html');
-        let dropHTML = e.dataTransfer.getData('text/html');
-        // this.parentNode.removeChild(source);
-        this.insertAdjacentHTML('beforebegin', dropHTML);
-        console.log(this.previousSibling)
-        let dropElem = this.previousSibling;
-        addDnD(dropElem);
+//     // Don't do anything if dropping the same column we're dragging.
+//     if (source != this) {
+//         // Set the source column's HTML to the HTML of the column we dropped on.
+//         //alert(this.outerHTML);
+//         //dragSrcEl.innerHTML = this.innerHTML;
+//         //this.innerHTML = e.dataTransfer.getData('text/html');
+//         let dropHTML = e.dataTransfer.getData('text/html');
+//         // this.parentNode.removeChild(source);
+//         this.insertAdjacentHTML('beforebegin', dropHTML);
+//         console.log(this.previousSibling)
+//         let dropElem = this.previousSibling;
+//         addDnD(dropElem);
 
-    }
-}
+//     }
+// }
