@@ -26,7 +26,7 @@ class MultimediaPlayer extends DOMGui {
         this.setDOMElements(guiParams);
         this.addListeners();
         this.addPlaylistListener();
-        this.setPlayerInfo();
+        this.setPlayerInfo(0);
     }
 
     get audioPlayer() {
@@ -59,7 +59,7 @@ class MultimediaPlayer extends DOMGui {
 
         this.addButtonListener('next',
             () => {
-                this.changePlayingSong(this.currentTrack + 1);
+                this.changePlayingSong(this.currentTrack + 1, this.currentTrack + 1, 'controls');
             });
 
 
@@ -75,9 +75,9 @@ class MultimediaPlayer extends DOMGui {
         this.addButtonListener('back',
             () => {
                 if ((this.currentTrack - 1) >= 0) {
-                    this.changePlayingSong(this.currentTrack - 1);
+                    this.changePlayingSong(this.currentTrack - 1, this.currentTrack - 1, 'controls');
                 } else {
-                    this.changePlayingSong(this.tracks.length - 1);
+                    this.changePlayingSong(this.tracks.length - 1, this.tracks.length - 1, 'controls');
                 }
             });
 
@@ -94,19 +94,44 @@ class MultimediaPlayer extends DOMGui {
     addPlaylistListener() {
         console.log('Eventos de nueva canción añadidos');
 
-        let songs = this._DOMElements['playlistMenu'];
-        console.log(songs.children.length)
-        for (let i = 0; i < songs.children.length; i++) {
-            songs.children[i].onclick = () => {
-                for (let j = 0; j < songs.children.length; j++) {
-                    songs.children[j].classList.remove('playing')
-                }
-                songs.children[i].classList.add('playing')
-                this.changePlayingSong(i, songs.children[i].src)
-                console.log('Click in song')
-            };
 
-        }
+        Array.from(this._DOMElements.playlistMenu.children).forEach(li => {
+            li.onclick = (e) => {
+                for (let j = 0; j < this._DOMElements.playlistMenu.children.length; j++) {
+                    this._DOMElements.playlistMenu.children[j].classList.remove('playing')
+                }
+                li.classList.add('playing')
+
+                let currentTrack;
+                Array.from(this._DOMElements.playlistMenu.children).forEach(element => {
+                    if (element.classList.contains('playing')) {
+                        currentTrack = [...this._DOMElements.playlistMenu.children].indexOf(element)
+                    }
+                });
+                this.changePlayingSong(li.dataset.index, currentTrack, 'click')
+            }
+        })
+
+        // let songs = this._DOMElements['playlistMenu'];
+        // console.log(songs.children.length)
+        // for (let i = 0; i < songs.children.length; i++) {
+        //     songs.children[i].onclick = (e) => {
+        //         for (let j = 0; j < songs.children.length; j++) {
+        //             songs.children[j].classList.remove('playing')
+        //         }
+
+        //         e.target.classList.add('playing')
+        //         Array.from(this._DOMElements.playlistMenu.children).forEach(element => {
+        //             if (element.classList.contains('playing')) {
+        //                 console.log([...this._DOMElements.playlistMenu.children].indexOf(element))
+        //             }
+        //         });
+        //         this.changePlayingSong(i, songs.children[i].src)
+        //         // console.log([...songs.children].indexOf(el))
+        //         console.log('Click in song')
+        //     };
+
+        // }
     }
 
     play() {
@@ -124,31 +149,35 @@ class MultimediaPlayer extends DOMGui {
         this._DOMElements.play.classList.toggle('btn-pause');
     }
 
-    changePlayingSong(index, src) {
+    changePlayingSong(index, ct, mode) {
         console.log(index)
-        if (index <= this.tracks.length - 1) {
-            this.currentTrack = index;
+        if (ct <= this.tracks.length - 1) {
+            this.currentTrack = ct;
         } else {
             this.currentTrack = 0;
+            index = this._DOMElements.playlistMenu.children[this.currentTrack].dataset.index
         }
-        this.audioPlayer.audio.src = src || this.tracks[this.currentTrack].src;
-        console.log(this.currentTrack)
+        this.audioPlayer.audio.src = this._DOMElements.playlistMenu.children[this.currentTrack].src;
+        console.log('Current track' + this.currentTrack)
 
-        this.play();
         this._DOMElements.loading.classList.add('loading');
-        let playing = this._DOMElements.playlistMenu.querySelector('.playing');
-        playing.classList.remove('playing');
+        this.play();
+
         let element = this._DOMElements.playlistMenu.children[this.currentTrack];
-        element.classList.add('playing');
+        if (mode == 'controls') {
+            let playing = this._DOMElements.playlistMenu.querySelector('.playing');
+            playing.classList.remove('playing');
+            element.classList.add('playing')
+        }
         element.scrollIntoView(true)
-        this.setPlayerInfo();
+        this.setPlayerInfo(index);
     }
 
-    setPlayerInfo() {
+    setPlayerInfo(i) {
         let element = this._DOMElements.playlistMenu.children[this.currentTrack];
         this._DOMElements.title.innerHTML = element.querySelector('.title').innerHTML;
         this._DOMElements.artist.innerHTML = element.querySelector('.artist').innerHTML;
-        this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[this.currentTrack].img || './assets/images/noImage.png'}')`;
+        this._DOMElements.cover.style.backgroundImage = `url('${this.tracks[i].img || './assets/images/noImage.png'}')`;
     }
 
     startTimeUpdateListener() {

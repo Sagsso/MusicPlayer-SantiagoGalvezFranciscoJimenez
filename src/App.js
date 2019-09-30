@@ -100,10 +100,12 @@ function allowDrop(ev) {
 
 }
 let source;
+let srcIndex;
 function drag(ev) {
     source = this;
     ev.dataTransfer.setData("text/plain", this.innerHTML);
     ev.dataTransfer.effectAllowed = "move";
+    srcIndex = [...ev.target.parentNode.children].indexOf(ev.target);
 }
 
 function dropFiles(ev) {
@@ -143,10 +145,13 @@ function dropFiles(ev) {
         }
     } else {
         if (ev.target.localName === 'li') {
+            console.log('ARRASTRANDO: ' + srcIndex)
 
+            let index = [...ev.target.parentNode.children].indexOf(ev.target);
             ev.target.insertAdjacentElement('beforebegin', source)
             // source.innerHTML = ev.target.innerHTML;
             // ev.target.innerHTML = ev.dataTransfer.getData("text/plain");
+            console.log('NUEVA POSICIÓN: ' + index)
         }
     }
 
@@ -164,6 +169,7 @@ function readString(dataView, offset, length) {
 
 function addSong(src, title, artist, total) {
     let item = document.createElement('li')
+    item.setAttribute('data-index', $playlist.children.length)
     addDnD(item)
     item.src = src
     item.innerHTML = `<span><span class="title" data-index="${$playlist.children.length}">${title}</span> -
