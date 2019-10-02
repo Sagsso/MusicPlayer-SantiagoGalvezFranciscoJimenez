@@ -314,6 +314,22 @@ body {
             transform: translateX(-$width/2);
             transition: transform 0.4s ease-in-out, 0s box-shadow 0.05s;
         }
+        .popup{
+            position: absolute;
+            border-radius: 5px;
+            top: 50%;
+            padding: 10px 0;
+            height: auto;
+            background: linear-gradient(to top right, #ff3301, #ff0101);
+            // filter: blur(10px);
+            max-width: 100%;
+            min-width: 100%;
+            color: white;
+            font-family: 'Open Sans';
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
     }
     
 }

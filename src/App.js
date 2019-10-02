@@ -144,21 +144,31 @@ function dropFiles(ev) {
                 console.log('artist: ', readString(dataView, 33, 30)); // artist
                 console.log('album: ', readString(dataView, 63, 30)); // album
                 console.log('year: ', readString(dataView, 93, 4)); // year
-                if(verifyType(file)){addSong(src, title, artist)
+                if (verifyType(file)) {
+                    addSong(src, title, artist)
+                    let obj = {
+                        src: src,
+                        img: null,
+                        title: title,
+                        artist: artist,
+                        totalTime: null
+                    }
+                    tracks.push(obj)
+                    myAudioPlayer.addPlaylistListener();
                     console.log('Formato compatible maricon')
-                }else{
+                } else {
                     console.log('Formato no compatible hpta')
+                    let popup = document.createElement('div')
+                    popup.innerHTML = "<span>Formato no compatible <br> Compatible con: mp3, mp4, m4a y wav</span>";
+                    popup.classList.add('popup')
+                    $playlist.appendChild(popup)
+                    setTimeout(function () {
+                        $playlist.removeChild(popup);
+                    }, 4000)
+
                 }
 
-                let obj = {
-                    src: src,
-                    img: null,
-                    title: title,
-                    artist: artist,
-                    totalTime: null
-                }
-                tracks.push(obj)
-                myAudioPlayer.addPlaylistListener();
+
             }
             reader.readAsArrayBuffer(blob);
         }
@@ -192,7 +202,7 @@ function addSong(src, title, artist, total) {
     addDnD(item)
     item.src = src
     item.innerHTML = `<span><span class="title" data-index="${$playlist.children.length}">${title}</span> -
-                                                <span class="artist">${artist}</span></span><span class="totalTime">${total}</span>`;
+                                                <span class="artist">${artist}</span></span>`;
     $playlist.appendChild(item);
 
 }

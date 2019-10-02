@@ -187,13 +187,15 @@ class MultimediaPlayer extends DOMGui {
             let current = this.audioPlayer.audio.currentTime;
             let progress = current / total;
             this.updateProgressBar(progress * 100);
-            this._DOMElements.currentTime.innerHTML = this.formatCurrentTime(current);
+            if (current <= total) {
+                this._DOMElements.currentTime.innerHTML = this.formatCurrentTime(current);
+            }
 
             if (current == total && this.audioPlayer.audio.paused) {
                 this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
                 this._DOMElements.play.innerHTML = play
                 let nextTrack = this.currentTrack + 1;
-                setTimeout(this.changePlayingSong.bind(this), 2000, nextTrack);
+                setTimeout(this.changePlayingSong.bind(this), 2000, nextTrack, nextTrack, 'controls');
             }
 
         }

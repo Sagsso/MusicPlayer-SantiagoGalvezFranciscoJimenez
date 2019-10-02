@@ -296,6 +296,21 @@ body ol#playlist.show {
   transform: translateX(-185px);
   transition: transform 0.4s ease-in-out, 0s box-shadow 0.05s;
 }
+body ol#playlist .popup {
+  position: absolute;
+  border-radius: 5px;
+  top: 50%;
+  padding: 10px 0;
+  height: auto;
+  background: linear-gradient(to top right, #ff3301, #ff0101);
+  max-width: 100%;
+  min-width: 100%;
+  color: white;
+  font-family: "Open Sans";
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
 
 @media (max-width: 375px) {
   body {
