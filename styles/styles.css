@@ -65,6 +65,7 @@ body #container #main #top {
   justify-content: center;
   height: 55%;
   background: #111;
+  background-image: url("../assets/images/stressedout.jpg");
   background-size: cover;
 }
 body #container #main #top .loading {

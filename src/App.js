@@ -108,6 +108,19 @@ function drag(ev) {
     srcIndex = [...ev.target.parentNode.children].indexOf(ev.target);
 }
 
+let availableFormats = ['mp3', 'm4a', 'mp4', 'wav'];
+function verifyType(file) {
+    let res = file.type.split("/")[1];
+    let response = false;
+    availableFormats.forEach(element => {
+        if (element == res) {
+            response = true;
+        }
+    });
+    return response;
+
+}
+
 function dropFiles(ev) {
     ev.preventDefault();
     let box = document.getElementById('playlist');
@@ -118,6 +131,7 @@ function dropFiles(ev) {
             let file = files[i];
             let blob = file.slice(file.size - 128, file.size);
             let reader = new FileReader();
+            console.log(files[i])
 
             reader.onload = function (evt) {
                 let buff = evt.target.result;
@@ -130,7 +144,12 @@ function dropFiles(ev) {
                 console.log('artist: ', readString(dataView, 33, 30)); // artist
                 console.log('album: ', readString(dataView, 63, 30)); // album
                 console.log('year: ', readString(dataView, 93, 4)); // year
-                addSong(src, title, artist)
+                if(verifyType(file)){addSong(src, title, artist)
+                    console.log('Formato compatible maricon')
+                }else{
+                    console.log('Formato no compatible hpta')
+                }
+
                 let obj = {
                     src: src,
                     img: null,

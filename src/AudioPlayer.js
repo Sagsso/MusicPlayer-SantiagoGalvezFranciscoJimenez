@@ -5,7 +5,7 @@ class AudioPlayer {
         this._audio = document.querySelector(audioTagSelector);
         this.audio.src = src;
         this.audio.volume = 1;
-        this.availableFormats = ['mp3', 'wav', 'ogg', 'aif'];
+        this.availableFormats = ['mp3', 'm4a', 'mp4', 'wav'];
     }
 
     get audio() {
@@ -25,7 +25,7 @@ class AudioPlayer {
     }
 
     verifyType() {
-        let res = this.audio.src.split(".")[1];
+        let res = this.audio.name.split("/")[1];
         let response = false;
         this.availableFormats.forEach(element => {
             if (element == res) {
