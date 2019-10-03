@@ -1,3 +1,3 @@
 # MusicPlayer-SantiagoGalvezFranciscoJimenez 
 
-Avances corte 2 en la rama web.
+Lee metadatos de canciones con ID3v1, no soporta ID3v2.
