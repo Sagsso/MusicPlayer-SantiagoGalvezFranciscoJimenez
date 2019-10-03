@@ -155,9 +155,9 @@ function dropFiles(ev) {
                     }
                     tracks.push(obj)
                     myAudioPlayer.addPlaylistListener();
-                    console.log('Formato compatible maricon')
+                    console.log('Formato compatible')
                 } else {
-                    console.log('Formato no compatible hpta')
+                    console.log('Formato no compatible')
                     let popup = document.createElement('div')
                     popup.innerHTML = "<span>Formato no compatible <br> Compatible con: mp3, mp4, m4a y wav</span>";
                     popup.classList.add('popup')
@@ -181,6 +181,7 @@ function dropFiles(ev) {
             // source.innerHTML = ev.target.innerHTML;
             // ev.target.innerHTML = ev.dataTransfer.getData("text/plain");
             console.log('NUEVA POSICIÓN: ' + index)
+            updateCT(ev.target);
         }
     }
 
@@ -234,3 +235,19 @@ function addDnD(el) {
 
 //     }
 // }
+
+function updateCT(element) {
+    let playing = document.querySelector('.playing');
+    let index = [...playing.parentNode.children].indexOf(playing);
+    myAudioPlayer.currentTrack = index;
+}
+
+function getIndex(n) {
+    let playlist = document.querySelector('#playlist');
+    if (n < playlist.children.length) {
+        let index = playlist.children[n].dataset.index;
+        return index;
+    } else {
+        return 0;
+    }
+}

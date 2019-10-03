@@ -59,7 +59,7 @@ class MultimediaPlayer extends DOMGui {
 
         this.addButtonListener('next',
             () => {
-                this.changePlayingSong(this.currentTrack + 1, this.currentTrack + 1, 'controls');
+                this.changePlayingSong(getIndex(this.currentTrack + 1), this.currentTrack + 1, 'controls');
             });
 
 
@@ -75,9 +75,9 @@ class MultimediaPlayer extends DOMGui {
         this.addButtonListener('back',
             () => {
                 if ((this.currentTrack - 1) >= 0) {
-                    this.changePlayingSong(this.currentTrack - 1, this.currentTrack - 1, 'controls');
+                    this.changePlayingSong(getIndex(this.currentTrack - 1), this.currentTrack - 1, 'controls');
                 } else {
-                    this.changePlayingSong(this.tracks.length - 1, this.tracks.length - 1, 'controls');
+                    this.changePlayingSong(getIndex(this.tracks.length - 1), this.tracks.length - 1, 'controls');
                 }
             });
 
@@ -167,13 +167,14 @@ class MultimediaPlayer extends DOMGui {
         if (mode == 'controls') {
             let playing = this._DOMElements.playlistMenu.querySelector('.playing');
             playing.classList.remove('playing');
-            element.classList.add('playing')
+            element.classList.add('playing');
         }
         element.scrollIntoView(true)
         this.setPlayerInfo(index);
     }
 
     setPlayerInfo(i) {
+        console.log(i)
         let element = this._DOMElements.playlistMenu.children[this.currentTrack];
         this._DOMElements.title.innerHTML = element.querySelector('.title').innerHTML;
         this._DOMElements.artist.innerHTML = element.querySelector('.artist').innerHTML;
@@ -195,7 +196,7 @@ class MultimediaPlayer extends DOMGui {
                 this._DOMElements.play.removeChild(this._DOMElements.play.firstChild);
                 this._DOMElements.play.innerHTML = play
                 let nextTrack = this.currentTrack + 1;
-                setTimeout(this.changePlayingSong.bind(this), 2000, nextTrack, nextTrack, 'controls');
+                setTimeout(this.changePlayingSong.bind(this), 2000, getIndex(nextTrack), nextTrack, 'controls');
             }
 
         }
