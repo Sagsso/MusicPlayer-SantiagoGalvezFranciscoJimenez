@@ -1,3 +1,3 @@
 # MusicPlayer-SantiagoGalvezFranciscoJimenez 
 
-Avances corte 2 en la rama web.
+En la rama web se encuentra una versión más avanzada y adaptable.
